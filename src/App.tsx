@@ -13,6 +13,8 @@ import CreateAlbumPage, {
   action as createAlbumAction,
 } from "./pages/albums/create";
 import AlbumsPage, { loader as albumsLoader } from "./pages/albums";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -76,7 +78,11 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;

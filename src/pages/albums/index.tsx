@@ -1,23 +1,27 @@
-import React, { Suspense } from "react";
-import { Await, LoaderFunction, useLoaderData } from "react-router-dom";
-import { getAlbums } from "../../api";
+import React, { useEffect } from "react";
 import AlbumList from "../../components/albumlist/AlbumList";
+import OptionalRenderer from "../../components/optionalRenderer/OptionalRenderer";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
+import { fetchAlbums } from "../../redux/actions/albums.actions";
+import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
+import { useAppSelector } from "../../redux/hooks/useAppSelector";
 const AlbumsPage = () => {
-  const { albumsPromise } = useLoaderData() as ReturnType<typeof loader>;
+  const { albums, isLoaded } = useAppSelector((state) => state.albums);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!isLoaded) {
+      dispatch(fetchAlbums() as any);
+    }
+  }, [dispatch, isLoaded]);
+
   return (
-    <Suspense fallback={<ListSkeleton withTitle />}>
-      <Await
-        resolve={albumsPromise}
-        children={(albums) => <AlbumList albums={albums} />}
-      />
-    </Suspense>
+    <OptionalRenderer
+      condition={isLoaded}
+      fallback={<ListSkeleton withTitle />}
+    >
+      <AlbumList albums={albums} />
+    </OptionalRenderer>
   );
 };
 
 export default AlbumsPage;
-export const loader: LoaderFunction = () => {
-  return {
-    albumsPromise: getAlbums(),
-  };
-};

@@ -1,5 +1,4 @@
 import { Album } from "../../types/album";
-import { User } from "../../types/user";
 
 interface AlbumsState {
   albums: Album[];
@@ -10,7 +9,7 @@ const initialState: AlbumsState = {
   albums: [],
   isLoaded: false,
 };
-enum AlbumsActionTypes {
+export enum AlbumsActionTypes {
   SET_ALBUMS = "albums/set",
 }
 
@@ -19,10 +18,10 @@ interface SetAlbumsAction {
   payload: Album[];
 }
 
-type AppAction = SetAlbumsAction;
+export type AlbumAction = SetAlbumsAction;
 export const albumsReducer = (
   state = initialState,
-  { type, payload }: AppAction
+  { type, payload }: AlbumAction
 ): AlbumsState => {
   switch (type) {
     case AlbumsActionTypes.SET_ALBUMS:

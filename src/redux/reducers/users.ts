@@ -1,4 +1,3 @@
-import { Album } from "../../types/album";
 import { User } from "../../types/user";
 
 interface AlbumsState {
@@ -10,22 +9,22 @@ const initialState: AlbumsState = {
   users: [],
   isLoaded: false,
 };
-enum AlbumsActionTypes {
-  SET_USERS = "albums/set",
+export enum UsersActionTypes {
+  SET_USERS = "users/set",
 }
 
 interface SetUsersAction {
-  type: AlbumsActionTypes.SET_USERS;
+  type: UsersActionTypes.SET_USERS;
   payload: User[];
 }
 
-type AppAction = SetUsersAction;
+type UserAction = SetUsersAction;
 export const usersReducer = (
   state = initialState,
-  { type, payload }: AppAction
+  { type, payload }: UserAction
 ): AlbumsState => {
   switch (type) {
-    case AlbumsActionTypes.SET_USERS:
+    case UsersActionTypes.SET_USERS:
       return {
         ...state,
         users: payload,

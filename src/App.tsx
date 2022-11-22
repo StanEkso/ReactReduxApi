@@ -12,7 +12,7 @@ import CreateUserPage, {
 import CreateAlbumPage, {
   action as createAlbumAction,
 } from "./pages/albums/create";
-import AlbumsPage, { loader as albumsLoader } from "./pages/albums";
+import AlbumsPage from "./pages/albums";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 const router = createBrowserRouter([
@@ -32,7 +32,6 @@ const router = createBrowserRouter([
         children: [
           {
             path: "",
-            loader: albumsLoader,
             element: <AlbumsPage />,
             index: true,
           },

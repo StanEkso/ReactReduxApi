@@ -1,9 +1,11 @@
-import { Dispatch } from "redux";
 import { getPhotos } from "../../api";
 import { PhotosAction, PhotosActionTypes } from "../reducers/photos";
+import { TypedThunkAction } from "../store";
 
-export const fetchPhotos = () => {
-  return async (dispatch: Dispatch<PhotosAction>) => {
+export type PhotosThunkAction = TypedThunkAction<PhotosAction>;
+
+export const fetchPhotos = (): PhotosThunkAction => {
+  return async (dispatch) => {
     const photos = await getPhotos();
     dispatch({ type: PhotosActionTypes.SET_PHOTOS, payload: photos });
   };

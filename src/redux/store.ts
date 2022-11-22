@@ -14,7 +14,7 @@ declare global {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(
   rootReducer,
-  compose(applyMiddleware(thunk), composeEnhancers(applyMiddleware(thunk)))
+  composeEnhancers(applyMiddleware(thunk))
 );
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

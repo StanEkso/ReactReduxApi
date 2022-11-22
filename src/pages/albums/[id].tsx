@@ -7,6 +7,7 @@ import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import PhotoCardSkeleton from "../../components/skeletons/PhotoCardSkeleton";
 import TitleSkeleton from "../../components/skeletons/TitleSkeleton";
 import { fetchAlbums } from "../../redux/actions/albums.actions";
+import { fetchUsers } from "../../redux/actions/users.actions";
 import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
 import { User } from "../../types/user";
@@ -20,6 +21,10 @@ const AlbumPage: FC = () => {
   );
   const { isLoaded: isUsersLoaded, users } = useAppSelector(
     (state) => state.users
+  );
+
+  const { isLoaded: isPhotosLoaded, photos } = useAppSelector(
+    (state) => state.photos
   );
   const currentAlbum = useMemo(() => {
     return albums.find((album) => album.id === id);
@@ -36,7 +41,7 @@ const AlbumPage: FC = () => {
 
   useEffect(() => {
     if (!isUsersLoaded) {
-      // dispatch(fetchAlbums() as any);
+      dispatch(fetchUsers() as any);
     }
   }, [dispatch, isAlbumsLoaded, isUsersLoaded]);
 

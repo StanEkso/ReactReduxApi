@@ -18,7 +18,7 @@ interface SetUsersAction {
   payload: User[];
 }
 
-type UserAction = SetUsersAction;
+export type UserAction = SetUsersAction;
 export const usersReducer = (
   state = initialState,
   { type, payload }: UserAction

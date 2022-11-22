@@ -18,18 +18,6 @@ const MainPage: FC = () => {
         >
           Check albums
         </Link>
-        <Link
-          to="/users/create"
-          className="rounded-sm border-2 p-3 my-2 hover:border-blue-500 cursor-pointer"
-        >
-          Create user
-        </Link>
-        <Link
-          to="/albums/create"
-          className="rounded-sm border-2 p-3 my-2 hover:border-blue-500 cursor-pointer"
-        >
-          Create album
-        </Link>
       </div>
     </div>
   );

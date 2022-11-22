@@ -1,22 +1,26 @@
-import React, { FC, Suspense } from "react";
-import { useLoaderData, Await } from "react-router-dom";
-import { getUsers } from "../../api";
+import React, { FC, useEffect } from "react";
+import OptionalRenderer from "../../components/optionalRenderer/OptionalRenderer";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserList from "../../components/userlist/UserList";
+import { fetchUsers } from "../../redux/actions/users.actions";
+import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
+import { useAppSelector } from "../../redux/hooks/useAppSelector";
 const UsersPage: FC = () => {
-  const { userPromise } = useLoaderData() as ReturnType<typeof loader>;
+  const { isLoaded, users } = useAppSelector((state) => state.users);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!isLoaded) {
+      dispatch(fetchUsers() as any);
+    }
+  }, [dispatch, isLoaded]);
   return (
-    <Suspense fallback={<ListSkeleton withTitle />}>
-      <Await
-        resolve={userPromise}
-        children={(users) => <UserList users={users} />}
-      />
-    </Suspense>
+    <OptionalRenderer
+      condition={isLoaded}
+      fallback={<ListSkeleton withTitle />}
+    >
+      <UserList users={users} />
+    </OptionalRenderer>
   );
 };
 
 export default UsersPage;
-
-export const loader = () => {
-  return { userPromise: getUsers() };
-};

@@ -10,23 +10,31 @@ import { fetchAlbums } from "../../redux/actions/albums.actions";
 import { fetchPhotos } from "../../redux/actions/photos.actions";
 import { fetchUsers } from "../../redux/actions/users.actions";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
+import { getAlbumAuthor, getAlbumById, getAlbumPhotos } from "../../utils";
+import { NotFoundRedirect } from "../404";
 
 const AlbumPage: FC = () => {
   const { id } = useLoaderData() as ReturnType<typeof loader>;
-  const { albums } = useAppSelector((state) => state.albums);
+  const { albums, isLoaded } = useAppSelector((state) => state.albums);
   const { users } = useAppSelector((state) => state.users);
 
   const { photos } = useAppSelector((state) => state.photos);
-  const currentAlbum = useMemo(() => {
-    return albums.find((album) => album.id === id);
-  }, [albums, id]);
-  const currentAlbumUser = useMemo(() => {
-    return users.find((user) => user.id === currentAlbum?.userId);
-  }, [currentAlbum?.userId, users]);
-  const currentAlbumPhotos = useMemo(() => {
-    return photos.filter((photo) => photo.albumId === currentAlbum?.id);
-  }, [currentAlbum?.id, photos]);
+  const currentAlbum = useMemo(
+    () => getAlbumById({ id, albums }),
+    [albums, id]
+  );
 
+  const currentAlbumUser = useMemo(
+    () => getAlbumAuthor({ album: currentAlbum, users }),
+    [currentAlbum, users]
+  );
+  const currentAlbumPhotos = useMemo(
+    () => getAlbumPhotos({ album: currentAlbum, photos }),
+    [currentAlbum, photos]
+  );
+  if (isLoaded && !currentAlbum) {
+    return <NotFoundRedirect />;
+  }
   return (
     <div>
       <div className="mb-4">

@@ -7,10 +7,10 @@ import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import PhotoCardSkeleton from "../../components/skeletons/PhotoCardSkeleton";
 import TitleSkeleton from "../../components/skeletons/TitleSkeleton";
 import { fetchAlbums } from "../../redux/actions/albums.actions";
+import { fetchPhotos } from "../../redux/actions/photos.actions";
 import { fetchUsers } from "../../redux/actions/users.actions";
 import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
-import { User } from "../../types/user";
 import { NotFoundRedirect } from "../404";
 
 const AlbumPage: FC = () => {
@@ -32,7 +32,9 @@ const AlbumPage: FC = () => {
   const currentAlbumUser = useMemo(() => {
     return users.find((user) => user.id === currentAlbum?.userId);
   }, [currentAlbum?.userId, users]);
-
+  const currentAlbumPhotos = useMemo(() => {
+    return photos.filter((photo) => photo.albumId === currentAlbum?.id);
+  }, [currentAlbum?.id, photos]);
   useEffect(() => {
     if (!isAlbumsLoaded) {
       dispatch(fetchAlbums() as any);
@@ -45,9 +47,16 @@ const AlbumPage: FC = () => {
     }
   }, [dispatch, isAlbumsLoaded, isUsersLoaded]);
 
+  useEffect(() => {
+    if (!isPhotosLoaded) {
+      dispatch(fetchPhotos() as any);
+    }
+  }, [dispatch, isPhotosLoaded]);
+
   if (
     (!currentAlbum && isAlbumsLoaded) ||
-    (!currentAlbumUser && isUsersLoaded)
+    (!currentAlbumUser && isUsersLoaded) ||
+    (!currentAlbumPhotos && isPhotosLoaded)
   ) {
     return <NotFoundRedirect />;
   }
@@ -75,43 +84,13 @@ const AlbumPage: FC = () => {
             </p>
           </OptionalRenderer>
         </OptionalRenderer>
+        <OptionalRenderer
+          fallback={<ListSkeleton element={PhotoCardSkeleton} grid />}
+          condition={isPhotosLoaded}
+        >
+          <PhotoList photos={currentAlbumPhotos} />
+        </OptionalRenderer>
       </div>
-
-      {/* <Suspense fallback={<TitleSkeleton />}>
-        <Await
-          errorElement={<NotFoundRedirect />}
-          resolve={albumPromise}
-          children={(album) => (
-            <>
-              <div className="mb-4">
-                <h3 className="font-bold mb-2 text-2xl">{album.title}</h3>
-                <Suspense fallback={<CreatedBySkeleton />}>
-                  <Await
-                    resolve={getUserById(album.userId)}
-                    children={({ name, id }: User) => (
-                      <p>
-                        Created by{" "}
-                        <Link
-                          to={"/users/" + id}
-                          className="hover:underline hover:text-blue-600"
-                        >
-                          {name}
-                        </Link>
-                      </p>
-                    )}
-                  />
-                </Suspense>
-              </div>
-            </>
-          )}
-        />
-      </Suspense>
-      <Suspense fallback={<ListSkeleton element={PhotoCardSkeleton} grid />}>
-        <Await
-          resolve={photosPromise}
-          children={(photos) => <PhotoList photos={photos} />}
-        />
-      </Suspense> */}
     </div>
   );
 };

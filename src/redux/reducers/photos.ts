@@ -9,11 +9,11 @@ const initialState: PhotosState = {
   isLoaded: false,
 };
 export enum PhotosActionTypes {
-  SET_ALBUMS = "photos/set",
+  SET_PHOTOS = "photos/set",
 }
 
 interface SetPhotosAction {
-  type: PhotosActionTypes.SET_ALBUMS;
+  type: PhotosActionTypes.SET_PHOTOS;
   payload: Photo[];
 }
 
@@ -23,7 +23,7 @@ export const photosReducer = (
   { type, payload }: PhotosAction
 ): PhotosState => {
   switch (type) {
-    case PhotosActionTypes.SET_ALBUMS:
+    case PhotosActionTypes.SET_PHOTOS:
       return {
         ...state,
         photos: payload,

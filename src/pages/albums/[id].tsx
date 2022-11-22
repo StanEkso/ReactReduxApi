@@ -32,6 +32,7 @@ const AlbumPage: FC = () => {
     () => getAlbumPhotos({ album: currentAlbum, photos }),
     [currentAlbum, photos]
   );
+
   if (isLoaded && !currentAlbum) {
     return <NotFoundRedirect />;
   }

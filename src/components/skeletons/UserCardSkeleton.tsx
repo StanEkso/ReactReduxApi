@@ -4,7 +4,7 @@ import TitleSkeleton from "./TitleSkeleton";
 
 const UserCard: FC = () => {
   return (
-    <div className="rounded-md p-4 border-2 flex flex-col gap-1">
+    <div className="rounded-md p-4 border-2 flex flex-col gap-1 animate-pulse">
       <TitleSkeleton />
       <StringSkeleton maxWidth={160} />
 

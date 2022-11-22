@@ -5,12 +5,13 @@ import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import { fetchAlbums } from "../../redux/actions/albums.actions";
 import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
+import { AlbumAction } from "../../redux/reducers/albums";
 const AlbumsPage = () => {
   const { albums, isLoaded } = useAppSelector((state) => state.albums);
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch<AlbumAction>();
   useEffect(() => {
     if (!isLoaded) {
-      dispatch(fetchAlbums() as any);
+      dispatch(fetchAlbums());
     }
   }, [dispatch, isLoaded]);
 

@@ -1,25 +1,22 @@
-import React, { FC, useEffect } from "react";
-import OptionalRenderer from "../../components/optionalRenderer/OptionalRenderer";
+import React, { FC } from "react";
+import ReduxLoader from "../../components/reduxLoaders/ReduxLoader";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserList from "../../components/userlist/UserList";
 import { fetchUsers } from "../../redux/actions/users.actions";
-import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
+import { RootState } from "../../redux/store";
+const usersSelector = (state: RootState) => state.users;
+
 const UsersPage: FC = () => {
-  const { isLoaded, users } = useAppSelector((state) => state.users);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (!isLoaded) {
-      dispatch(fetchUsers() as any);
-    }
-  }, [dispatch, isLoaded]);
+  const { users } = useAppSelector(usersSelector);
   return (
-    <OptionalRenderer
-      condition={isLoaded}
+    <ReduxLoader
       fallback={<ListSkeleton withTitle />}
+      selector={usersSelector}
+      loaderAction={fetchUsers}
     >
       <UserList users={users} />
-    </OptionalRenderer>
+    </ReduxLoader>
   );
 };
 

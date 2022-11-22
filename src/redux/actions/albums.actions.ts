@@ -1,11 +1,13 @@
-import { Dispatch } from "redux";
 import { getAlbums } from "../../api";
 import { AlbumAction, AlbumsActionTypes } from "../reducers/albums";
+import { TypedThunkAction } from "../store";
 
-export const fetchAlbums = () => {
-  return (dispatch: Dispatch<AlbumAction>) => {
-    getAlbums().then((albums) => {
-      dispatch({ type: AlbumsActionTypes.SET_ALBUMS, payload: albums });
-    });
+export type AlbumsThunkAction = TypedThunkAction<AlbumAction>;
+
+export const fetchAlbums = (): AlbumsThunkAction => {
+  return async (dispatch) => {
+    const albums = await getAlbums();
+
+    dispatch({ type: AlbumsActionTypes.SET_ALBUMS, payload: albums });
   };
 };

@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { Link, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
-import OptionalRenderer from "../../components/optionalRenderer/OptionalRenderer";
 import PhotoList from "../../components/photo/PhotoList";
+import ReduxLoader from "../../components/reduxLoaders/ReduxLoader";
 import CreatedBySkeleton from "../../components/skeletons/CreatedBySkeleton";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import PhotoCardSkeleton from "../../components/skeletons/PhotoCardSkeleton";
@@ -9,23 +9,14 @@ import TitleSkeleton from "../../components/skeletons/TitleSkeleton";
 import { fetchAlbums } from "../../redux/actions/albums.actions";
 import { fetchPhotos } from "../../redux/actions/photos.actions";
 import { fetchUsers } from "../../redux/actions/users.actions";
-import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
-import { NotFoundRedirect } from "../404";
 
 const AlbumPage: FC = () => {
-  const dispatch = useAppDispatch();
   const { id } = useLoaderData() as ReturnType<typeof loader>;
-  const { isLoaded: isAlbumsLoaded, albums } = useAppSelector(
-    (state) => state.albums
-  );
-  const { isLoaded: isUsersLoaded, users } = useAppSelector(
-    (state) => state.users
-  );
+  const { albums } = useAppSelector((state) => state.albums);
+  const { users } = useAppSelector((state) => state.users);
 
-  const { isLoaded: isPhotosLoaded, photos } = useAppSelector(
-    (state) => state.photos
-  );
+  const { photos } = useAppSelector((state) => state.photos);
   const currentAlbum = useMemo(() => {
     return albums.find((album) => album.id === id);
   }, [albums, id]);
@@ -35,61 +26,39 @@ const AlbumPage: FC = () => {
   const currentAlbumPhotos = useMemo(() => {
     return photos.filter((photo) => photo.albumId === currentAlbum?.id);
   }, [currentAlbum?.id, photos]);
-  useEffect(() => {
-    if (!isAlbumsLoaded) {
-      dispatch(fetchAlbums() as any);
-    }
-  }, [dispatch, isAlbumsLoaded]);
-
-  useEffect(() => {
-    if (!isUsersLoaded) {
-      dispatch(fetchUsers() as any);
-    }
-  }, [dispatch, isAlbumsLoaded, isUsersLoaded]);
-
-  useEffect(() => {
-    if (!isPhotosLoaded) {
-      dispatch(fetchPhotos() as any);
-    }
-  }, [dispatch, isPhotosLoaded]);
-
-  if (
-    (!currentAlbum && isAlbumsLoaded) ||
-    (!currentAlbumUser && isUsersLoaded) ||
-    (!currentAlbumPhotos && isPhotosLoaded)
-  ) {
-    return <NotFoundRedirect />;
-  }
 
   return (
     <div>
       <div className="mb-4">
-        <OptionalRenderer
+        <ReduxLoader
           fallback={<TitleSkeleton />}
-          condition={isAlbumsLoaded}
+          selector={(state) => state.albums}
+          loaderAction={fetchAlbums}
         >
           <h3 className="font-bold mb-2 text-2xl">{currentAlbum?.title}</h3>
-          <OptionalRenderer
-            fallback={<CreatedBySkeleton />}
-            condition={isUsersLoaded}
-          >
-            <p>
-              Created by{" "}
-              <Link
-                to={"/users/" + currentAlbumUser?.id}
-                className="hover:underline hover:text-blue-600"
-              >
-                {currentAlbumUser?.name}
-              </Link>
-            </p>
-          </OptionalRenderer>
-        </OptionalRenderer>
-        <OptionalRenderer
+        </ReduxLoader>
+        <ReduxLoader
+          fallback={<CreatedBySkeleton />}
+          selector={(state) => state.users}
+          loaderAction={fetchUsers}
+        >
+          <p>
+            Created by{" "}
+            <Link
+              to={"/users/" + currentAlbumUser?.id}
+              className="hover:underline hover:text-blue-600"
+            >
+              {currentAlbumUser?.name}
+            </Link>
+          </p>
+        </ReduxLoader>
+        <ReduxLoader
           fallback={<ListSkeleton element={PhotoCardSkeleton} grid />}
-          condition={isPhotosLoaded}
+          selector={(state) => state.photos}
+          loaderAction={fetchPhotos}
         >
           <PhotoList photos={currentAlbumPhotos} />
-        </OptionalRenderer>
+        </ReduxLoader>
       </div>
     </div>
   );

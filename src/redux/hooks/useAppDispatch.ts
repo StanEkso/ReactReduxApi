@@ -1,4 +1,7 @@
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
+import { Action } from "redux";
+import { TypedThunkDispatch } from "../store";
 
-export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppDispatch: <
+  ActionType extends Action<any>
+>() => TypedThunkDispatch<ActionType> = useDispatch;

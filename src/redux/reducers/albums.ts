@@ -1,6 +1,6 @@
 import { Album } from "../../types/album";
 
-interface AlbumsState {
+export interface AlbumsState {
   albums: Album[];
   isLoaded: boolean;
 }
@@ -21,13 +21,13 @@ interface SetAlbumsAction {
 export type AlbumAction = SetAlbumsAction;
 export const albumsReducer = (
   state = initialState,
-  { type, payload }: AlbumAction
+  action: AlbumAction
 ): AlbumsState => {
-  switch (type) {
+  switch (action.type) {
     case AlbumsActionTypes.SET_ALBUMS:
       return {
         ...state,
-        albums: payload,
+        albums: action.payload,
         isLoaded: true,
       };
     default:

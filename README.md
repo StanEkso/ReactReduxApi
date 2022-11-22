@@ -1,8 +1,8 @@
-# React SPA & API
+# React Redux & API
 
-This project is example of "multi-page SPA" using React-Router.
+This project is example of "multi-page SPA" using React-Router and Redux.
 
-Visit http://spa-lemon.vercel.app/ to checkout it by yourself.
+Visit https://react-redux-api-omega.vercel.app/ to checkout it by yourself.
 
 ## Preview on Desktop
 
@@ -13,6 +13,7 @@ Visit http://spa-lemon.vercel.app/ to checkout it by yourself.
 
 - React
 - React Hooks (and custom hooks)
+- Redux and React-Redux/
 - Typescript
 - TailWind for styling
 - React Router DOM for routing
@@ -29,6 +30,8 @@ Visit http://spa-lemon.vercel.app/ to checkout it by yourself.
   - For lists: f.e. album list, user list and etc.
   - For cards: f.e. user card, photo card
   - Etc
+- Data (e.g. users, albums and photos) is shared between pages.
+  - User shouldn't load repeating data few times.
 - App is works fine for many devices (320px-1920px)
 
 ## Local install

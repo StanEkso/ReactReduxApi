@@ -1,27 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import AlbumList from "../../components/albumlist/AlbumList";
-import OptionalRenderer from "../../components/optionalRenderer/OptionalRenderer";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import { fetchAlbums } from "../../redux/albums/actions";
-import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
-import { AlbumAction } from "../../redux/albums/reducer";
+import {
+  selectAlbumsData,
+  selectAlbumsIsLoaded,
+} from "../../redux/albums/selectors";
+import ReduxLoader from "../../components/reduxLoaders/ReduxLoader";
 const AlbumsPage = () => {
-  const { albums, isLoaded } = useAppSelector((state) => state.albums);
-  const dispatch = useAppDispatch<AlbumAction>();
-  useEffect(() => {
-    if (!isLoaded) {
-      dispatch(fetchAlbums());
-    }
-  }, [dispatch, isLoaded]);
-
+  const albums = useAppSelector(selectAlbumsData);
   return (
-    <OptionalRenderer
-      condition={isLoaded}
+    <ReduxLoader
+      selector={selectAlbumsIsLoaded}
       fallback={<ListSkeleton withTitle />}
+      loaderAction={fetchAlbums}
     >
       <AlbumList albums={albums} />
-    </OptionalRenderer>
+    </ReduxLoader>
   );
 };
 

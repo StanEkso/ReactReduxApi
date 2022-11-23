@@ -6,7 +6,7 @@ import OptionalRenderer from "../optionalRenderer/OptionalRenderer";
 
 interface Props {
   fallback: React.ReactNode;
-  selector: (state: RootState) => NonNullable<RootState[keyof typeof state]>;
+  selector: (state: RootState) => boolean;
   loaderAction: () => TypedThunkAction;
 }
 
@@ -16,7 +16,7 @@ const ReduxLoader: FC<Props & PropsWithChildren> = ({
   selector,
   loaderAction,
 }) => {
-  const { isLoaded } = useAppSelector(selector);
+  const isLoaded = useAppSelector(selector);
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (!isLoaded) {

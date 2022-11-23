@@ -4,15 +4,17 @@ import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserList from "../../components/userlist/UserList";
 import { fetchUsers } from "../../redux/users/actions";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
-import { RootState } from "../../redux/store";
-const usersSelector = (state: RootState) => state.users;
+import {
+  selectUsersData,
+  selectUsersIsLoaded,
+} from "../../redux/users/selectors";
 
 const UsersPage: FC = () => {
-  const { users } = useAppSelector(usersSelector);
+  const users = useAppSelector(selectUsersData);
   return (
     <ReduxLoader
       fallback={<ListSkeleton withTitle />}
-      selector={usersSelector}
+      selector={selectUsersIsLoaded}
       loaderAction={fetchUsers}
     >
       <UserList users={users} />

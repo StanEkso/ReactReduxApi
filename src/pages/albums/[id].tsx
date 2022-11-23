@@ -12,13 +12,25 @@ import { fetchUsers } from "../../redux/users/actions";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
 import { getAlbumAuthor, getAlbumById, getAlbumPhotos } from "../../utils";
 import { NotFoundRedirect } from "../404";
+import {
+  selectAlbumsIsLoaded,
+  selectAlbumsState,
+} from "../../redux/albums/selectors";
+import {
+  selectUsersData,
+  selectUsersIsLoaded,
+} from "../../redux/users/selectors";
+import {
+  selectPhotosData,
+  selectPhotosIsLoaded,
+} from "../../redux/photos/selectors";
 
 const AlbumPage: FC = () => {
   const { id } = useLoaderData() as ReturnType<typeof loader>;
-  const { albums, isLoaded } = useAppSelector((state) => state.albums);
-  const { users } = useAppSelector((state) => state.users);
+  const { albums, isLoaded } = useAppSelector(selectAlbumsState);
+  const users = useAppSelector(selectUsersData);
 
-  const { photos } = useAppSelector((state) => state.photos);
+  const photos = useAppSelector(selectPhotosData);
   const currentAlbum = useMemo(
     () => getAlbumById({ id, albums }),
     [albums, id]
@@ -41,14 +53,14 @@ const AlbumPage: FC = () => {
       <div className="mb-4">
         <ReduxLoader
           fallback={<TitleSkeleton />}
-          selector={(state) => state.albums}
+          selector={selectAlbumsIsLoaded}
           loaderAction={fetchAlbums}
         >
           <h3 className="font-bold mb-2 text-2xl">{currentAlbum?.title}</h3>
         </ReduxLoader>
         <ReduxLoader
           fallback={<CreatedBySkeleton />}
-          selector={(state) => state.users}
+          selector={selectUsersIsLoaded}
           loaderAction={fetchUsers}
         >
           <p>
@@ -63,7 +75,7 @@ const AlbumPage: FC = () => {
         </ReduxLoader>
         <ReduxLoader
           fallback={<ListSkeleton element={PhotoCardSkeleton} grid />}
-          selector={(state) => state.photos}
+          selector={selectPhotosIsLoaded}
           loaderAction={fetchPhotos}
         >
           <PhotoList photos={currentAlbumPhotos} />

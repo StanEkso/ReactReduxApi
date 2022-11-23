@@ -9,12 +9,18 @@ import { fetchAlbums } from "../../redux/albums/actions";
 import { fetchUsers } from "../../redux/users/actions";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
 import { NotFoundRedirect } from "../404";
+import {
+  selectUsersIsLoaded,
+  selectUsersState,
+} from "../../redux/users/selectors";
+import {
+  selectAlbumsData,
+  selectAlbumsIsLoaded,
+} from "../../redux/albums/selectors";
 const UserPage: FC = () => {
   const { id } = useLoaderData() as ReturnType<typeof loader>;
-  const { users, isLoaded: isUsersLoaded } = useAppSelector(
-    (state) => state.users
-  );
-  const { albums } = useAppSelector((state) => state.albums);
+  const { users, isLoaded: isUsersLoaded } = useAppSelector(selectUsersState);
+  const albums = useAppSelector(selectAlbumsData);
   const selectedUser = useMemo(
     () => users.find((user) => user.id === id),
     [id, users]
@@ -29,14 +35,14 @@ const UserPage: FC = () => {
     <div className="grid md:grid-cols-[1fr_2fr] gap-8 lg:gap-10 xl:gap-12">
       <ReduxLoader
         fallback={<UserCardSkeleton />}
-        selector={(state) => state.users}
+        selector={selectUsersIsLoaded}
         loaderAction={fetchUsers}
       >
         {selectedUser && <UserCard {...selectedUser} />}
       </ReduxLoader>
       <ReduxLoader
         fallback={<ListSkeleton withTitle />}
-        selector={(state) => state.albums}
+        selector={selectAlbumsIsLoaded}
         loaderAction={fetchAlbums}
       >
         <AlbumList albums={selectedUserAlbums} />

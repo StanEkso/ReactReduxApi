@@ -1,5 +1,5 @@
 import { getPhotos } from "../../api";
-import { PhotosAction, PhotosActionTypes } from "../reducers/photos";
+import { PhotosAction, PhotosActionTypes } from "./reducer";
 import { TypedThunkAction } from "../store";
 
 export type PhotosThunkAction = TypedThunkAction<PhotosAction>;

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import ReduxLoader from "../../components/reduxLoaders/ReduxLoader";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserList from "../../components/userlist/UserList";
-import { fetchUsers } from "../../redux/actions/users.actions";
+import { fetchUsers } from "../../redux/users/actions";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
 import { RootState } from "../../redux/store";
 const usersSelector = (state: RootState) => state.users;

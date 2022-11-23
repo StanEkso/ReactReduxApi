@@ -5,8 +5,8 @@ import ReduxLoader from "../../components/reduxLoaders/ReduxLoader";
 import ListSkeleton from "../../components/skeletons/ListSkeleton";
 import UserCardSkeleton from "../../components/skeletons/UserCardSkeleton";
 import UserCard from "../../components/usercard/UserCard";
-import { fetchAlbums } from "../../redux/actions/albums.actions";
-import { fetchUsers } from "../../redux/actions/users.actions";
+import { fetchAlbums } from "../../redux/albums/actions";
+import { fetchUsers } from "../../redux/users/actions";
 import { useAppSelector } from "../../redux/hooks/useAppSelector";
 import { NotFoundRedirect } from "../404";
 const UserPage: FC = () => {

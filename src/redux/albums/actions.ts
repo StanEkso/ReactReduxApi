@@ -1,5 +1,5 @@
 import { getAlbums } from "../../api";
-import { AlbumAction, AlbumsActionTypes } from "../reducers/albums";
+import { AlbumAction, AlbumsActionTypes } from "./reducer";
 import { TypedThunkAction } from "../store";
 
 export type AlbumsThunkAction = TypedThunkAction<AlbumAction>;

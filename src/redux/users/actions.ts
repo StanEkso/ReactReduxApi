@@ -1,5 +1,5 @@
 import { getUsers } from "../../api";
-import { UserAction, UsersActionTypes } from "../reducers/users";
+import { UserAction, UsersActionTypes } from "./reducer";
 import { TypedThunkAction } from "../store";
 
 export type AlbumsThunkAction = TypedThunkAction<UserAction>;

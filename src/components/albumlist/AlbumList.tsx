@@ -7,10 +7,10 @@ interface Props {
 }
 
 const AlbumList: FC<Props> = ({ albums }) => {
-  if (!albums.length) return null;
   return (
     <div>
       <h3 className="font-bold mb-2 text-2xl">Albums</h3>
+      {!albums.length && <h3>There are no albums here.</h3>}
       <div className="">
         {albums.map(({ id, title }) => (
           <div

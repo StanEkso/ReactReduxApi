@@ -1,16 +1,9 @@
-import React, { FC } from "react";
-import { User } from "../../types/user";
+import React, { FC } from 'react';
+import { User } from '../../types/user';
 
 type Props = User;
 
-const UserCard: FC<Props> = ({
-  name,
-  username,
-  email,
-  phone,
-  website,
-  address,
-}) => {
+const UserCard: FC<Props> = ({ name, username, email, phone, website, address }) => {
   return (
     <div className="rounded-md p-4 border-2 flex flex-col gap-1">
       <h3 className="font-bold">{name}</h3>
@@ -22,7 +15,7 @@ const UserCard: FC<Props> = ({
           alt="Mail icon"
           className="h-4"
         />
-        <a href={"mailto:" + email}>{email}</a>
+        <a href={'mailto:' + email}>{email}</a>
       </p>
 
       <p className="flex gap-2 items-center">
@@ -31,7 +24,7 @@ const UserCard: FC<Props> = ({
           alt="Phone icon"
           className="h-4"
         />
-        <a href={"tel:+" + phone}>{phone}</a>
+        <a href={'tel:+' + phone}>{phone}</a>
       </p>
       <p className="flex gap-2 items-center">
         <img
@@ -39,7 +32,7 @@ const UserCard: FC<Props> = ({
           alt="Website Icon"
           className="h-4"
         />
-        <a href={"https://" + website}>{"https://" + website}</a>
+        <a href={'https://' + website}>{'https://' + website}</a>
       </p>
       <p></p>
       <p className="flex gap-2 items-center">

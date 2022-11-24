@@ -1,6 +1,6 @@
-import { getPhotos } from "../../api";
-import { PhotosAction, PhotosActionTypes } from "./reducer";
-import { TypedThunkAction } from "../store";
+import { getPhotos } from '../../api';
+import { PhotosAction, PhotosActionTypes } from './reducer';
+import { TypedThunkAction } from '../store';
 
 export type PhotosThunkAction = TypedThunkAction<PhotosAction>;
 

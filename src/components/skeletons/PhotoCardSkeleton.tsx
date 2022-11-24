@@ -1,6 +1,6 @@
-import React from "react";
-import ImageSkeleton from "./ImageSkeleton";
-import StringSkeleton from "./StringSkeleton";
+import React from 'react';
+import ImageSkeleton from './ImageSkeleton';
+import StringSkeleton from './StringSkeleton';
 
 const PhotoCardSkeleton = () => {
   return (

@@ -1,29 +1,20 @@
-import React, { FC, useMemo } from "react";
-import { Link, LoaderFunctionArgs, useLoaderData } from "react-router-dom";
-import PhotoList from "../../components/photo/PhotoList";
-import ReduxLoader from "../../components/reduxLoaders/ReduxLoader";
-import CreatedBySkeleton from "../../components/skeletons/CreatedBySkeleton";
-import ListSkeleton from "../../components/skeletons/ListSkeleton";
-import PhotoCardSkeleton from "../../components/skeletons/PhotoCardSkeleton";
-import TitleSkeleton from "../../components/skeletons/TitleSkeleton";
-import { fetchAlbums } from "../../redux/albums/actions";
-import { fetchPhotos } from "../../redux/photos/actions";
-import { fetchUsers } from "../../redux/users/actions";
-import { useAppSelector } from "../../redux/hooks/useAppSelector";
-import { getAlbumAuthor, getAlbumById, getAlbumPhotos } from "../../utils";
-import { NotFoundRedirect } from "../404";
-import {
-  selectAlbumsIsLoaded,
-  selectAlbumsState,
-} from "../../redux/albums/selectors";
-import {
-  selectUsersData,
-  selectUsersIsLoaded,
-} from "../../redux/users/selectors";
-import {
-  selectPhotosData,
-  selectPhotosIsLoaded,
-} from "../../redux/photos/selectors";
+import React, { FC, useMemo } from 'react';
+import { Link, LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
+import PhotoList from '../../components/photo/PhotoList';
+import ReduxLoader from '../../components/reduxLoaders/ReduxLoader';
+import CreatedBySkeleton from '../../components/skeletons/CreatedBySkeleton';
+import ListSkeleton from '../../components/skeletons/ListSkeleton';
+import PhotoCardSkeleton from '../../components/skeletons/PhotoCardSkeleton';
+import TitleSkeleton from '../../components/skeletons/TitleSkeleton';
+import { fetchAlbums } from '../../redux/albums/actions';
+import { fetchPhotos } from '../../redux/photos/actions';
+import { fetchUsers } from '../../redux/users/actions';
+import { useAppSelector } from '../../redux/hooks/useAppSelector';
+import { getAlbumAuthor, getAlbumById, getAlbumPhotos } from '../../utils';
+import { NotFoundRedirect } from '../404';
+import { selectAlbumsIsLoaded, selectAlbumsState } from '../../redux/albums/selectors';
+import { selectUsersData, selectUsersIsLoaded } from '../../redux/users/selectors';
+import { selectPhotosData, selectPhotosIsLoaded } from '../../redux/photos/selectors';
 
 const AlbumPage: FC = () => {
   const { id } = useLoaderData() as ReturnType<typeof loader>;
@@ -31,10 +22,7 @@ const AlbumPage: FC = () => {
   const users = useAppSelector(selectUsersData);
 
   const photos = useAppSelector(selectPhotosData);
-  const currentAlbum = useMemo(
-    () => getAlbumById({ id, albums }),
-    [albums, id]
-  );
+  const currentAlbum = useMemo(() => getAlbumById({ id, albums }), [albums, id]);
 
   const currentAlbumUser = useMemo(
     () => getAlbumAuthor({ album: currentAlbum, users }),
@@ -64,9 +52,9 @@ const AlbumPage: FC = () => {
           loaderAction={fetchUsers}
         >
           <p>
-            Created by{" "}
+            Created by{' '}
             <Link
-              to={"/users/" + currentAlbumUser?.id}
+              to={'/users/' + currentAlbumUser?.id}
               className="hover:underline hover:text-blue-600"
             >
               {currentAlbumUser?.name}
@@ -90,6 +78,6 @@ export default AlbumPage;
 export const loader = ({ params: { id } }: LoaderFunctionArgs) => {
   const parsedId = id ? (isNaN(+id) ? 0 : +id) : 0;
   return {
-    id: parsedId,
+    id: parsedId
   };
 };

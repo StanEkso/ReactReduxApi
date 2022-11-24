@@ -1,8 +1,8 @@
-import React, { FC, PropsWithChildren, useEffect } from "react";
-import { useAppDispatch } from "../../redux/hooks/useAppDispatch";
-import { useAppSelector } from "../../redux/hooks/useAppSelector";
-import { RootState, TypedThunkAction } from "../../redux/store";
-import OptionalRenderer from "../optionalRenderer/OptionalRenderer";
+import React, { FC, PropsWithChildren, useEffect } from 'react';
+import { useAppDispatch } from '../../redux/hooks/useAppDispatch';
+import { useAppSelector } from '../../redux/hooks/useAppSelector';
+import { RootState, TypedThunkAction } from '../../redux/store';
+import OptionalRenderer from '../optionalRenderer/OptionalRenderer';
 
 interface Props {
   fallback: React.ReactNode;
@@ -14,7 +14,7 @@ const ReduxLoader: FC<Props & PropsWithChildren> = ({
   children,
   fallback,
   selector,
-  loaderAction,
+  loaderAction
 }) => {
   const isLoaded = useAppSelector(selector);
   const dispatch = useAppDispatch();

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
 
 interface Props {
   options: { key: string | number; value: string }[];
@@ -6,24 +6,22 @@ interface Props {
 
 const getOptionClass = (active: boolean) =>
   active
-    ? "px-2  bg-blue-700 text-white rounded-sm cursor-pointer"
-    : "px-2 cursor-pointer hover:bg-gray-100 ease-in duration-100";
+    ? 'px-2  bg-blue-700 text-white rounded-sm cursor-pointer'
+    : 'px-2 cursor-pointer hover:bg-gray-100 ease-in duration-100';
 
 const Select: FC<Props> = ({ options }) => {
   const [selected, setSelected] = useState(options[0]);
   const [isActive, setIsActive] = useState(false);
-  const handleSelect =
-    (select: { key: string | number; value: string }) => () => {
-      setSelected(select);
-      setIsActive(false);
-    };
+  const handleSelect = (select: { key: string | number; value: string }) => () => {
+    setSelected(select);
+    setIsActive(false);
+  };
   const handleKeyDown =
-    (select: { key: string | number; value: string }) =>
-    (e: React.KeyboardEvent) => {
+    (select: { key: string | number; value: string }) => (e: React.KeyboardEvent) => {
       switch (e.key) {
-        case " ":
-        case "SpaceBar":
-        case "Enter":
+        case ' ':
+        case 'SpaceBar':
+        case 'Enter':
           e.preventDefault();
           setSelected(select);
           setIsActive(false);
@@ -43,7 +41,7 @@ const Select: FC<Props> = ({ options }) => {
         className="rotate-90 absolute top-1 right-1 scale-y-125 scale-x-75 opacity-50"
         type="button"
       >
-        {">"}
+        {'>'}
       </button>
       {isActive && (
         <ul

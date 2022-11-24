@@ -1,4 +1,4 @@
-import { Photo } from "../../types/photo";
+import { Photo } from '../../types/photo';
 interface PhotosState {
   photos: Photo[];
   isLoaded: boolean;
@@ -6,10 +6,10 @@ interface PhotosState {
 
 const initialState: PhotosState = {
   photos: [],
-  isLoaded: false,
+  isLoaded: false
 };
 export enum PhotosActionTypes {
-  SET_PHOTOS = "photos/set",
+  SET_PHOTOS = 'photos/set'
 }
 
 interface SetPhotosAction {
@@ -27,7 +27,7 @@ export const photosReducer = (
       return {
         ...state,
         photos: payload,
-        isLoaded: true,
+        isLoaded: true
       };
     default:
       return state;

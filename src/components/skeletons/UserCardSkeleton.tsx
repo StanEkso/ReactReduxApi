@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import StringSkeleton from "./StringSkeleton";
-import TitleSkeleton from "./TitleSkeleton";
+import React, { FC } from 'react';
+import StringSkeleton from './StringSkeleton';
+import TitleSkeleton from './TitleSkeleton';
 
 const UserCard: FC = () => {
   return (

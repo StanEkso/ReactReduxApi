@@ -1,15 +1,11 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren } from 'react';
 
 interface Props {
   fallback: React.ReactNode;
   condition: boolean;
 }
 
-const OptionalRenderer: FC<Props & PropsWithChildren> = ({
-  fallback,
-  children,
-  condition,
-}) => {
+const OptionalRenderer: FC<Props & PropsWithChildren> = ({ fallback, children, condition }) => {
   return (
     <>
       {condition && children}

@@ -1,5 +1,5 @@
-import React, { FC } from "react";
-import { Photo } from "../../types/photo";
+import React, { FC } from 'react';
+import { Photo } from '../../types/photo';
 
 type Props = Photo;
 

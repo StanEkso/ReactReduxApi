@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { Photo } from "../../types/photo";
-import PhotoCard from "./PhotoCard";
+import React, { FC } from 'react';
+import { Photo } from '../../types/photo';
+import PhotoCard from './PhotoCard';
 
 interface PhotoListProps {
   photos: Photo[];

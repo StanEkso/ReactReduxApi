@@ -1,4 +1,4 @@
-import { RootState } from "../store";
+import { RootState } from '../store';
 
 export const selectAlbumsState = (state: RootState) => state.albums;
 export const selectAlbumsData = (state: RootState) => state.albums.albums;

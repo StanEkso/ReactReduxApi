@@ -1,63 +1,63 @@
-import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import AlbumPage, { loader as albumLoader } from "./pages/albums/[id]";
-import UsersPage from "./pages/users/";
-import NotFoundPage, { NotFoundRedirect } from "./pages/404";
-import UserPage, { loader as userLoader } from "./pages/users/[id]";
-import MainPage from "./pages";
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './components/layout/Layout';
+import AlbumPage, { loader as albumLoader } from './pages/albums/[id]';
+import UsersPage from './pages/users/';
+import NotFoundPage, { NotFoundRedirect } from './pages/404';
+import UserPage, { loader as userLoader } from './pages/users/[id]';
+import MainPage from './pages';
 
-import AlbumsPage from "./pages/albums";
-import { store } from "./redux/store";
-import { Provider } from "react-redux";
+import AlbumsPage from './pages/albums';
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     errorElement: <NotFoundRedirect />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <MainPage />,
-        index: true,
+        index: true
       },
       {
-        path: "albums/",
+        path: 'albums/',
         errorElement: <NotFoundRedirect />,
         children: [
           {
-            path: "",
+            path: '',
             element: <AlbumsPage />,
-            index: true,
+            index: true
           },
           {
-            path: ":id/",
+            path: ':id/',
             element: <AlbumPage />,
-            loader: albumLoader,
-          },
-        ],
+            loader: albumLoader
+          }
+        ]
       },
       {
-        path: "users/",
+        path: 'users/',
         children: [
           {
-            path: "",
+            path: '',
             element: <UsersPage />,
-            index: true,
+            index: true
           },
           {
-            path: ":id/",
+            path: ':id/',
             element: <UserPage />,
-            loader: userLoader,
-          },
-        ],
+            loader: userLoader
+          }
+        ]
       },
       {
-        path: "/404",
-        element: <NotFoundPage />,
-      },
-    ],
-  },
+        path: '/404',
+        element: <NotFoundPage />
+      }
+    ]
+  }
 ]);
 function App() {
   return (

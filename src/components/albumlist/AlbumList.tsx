@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { Link } from "react-router-dom";
-import { Album } from "../../types/album";
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { Album } from '../../types/album';
 
 interface Props {
   albums: Album[];
@@ -22,7 +22,7 @@ const AlbumList: FC<Props> = ({ albums }) => {
               className="w-6 h-6"
               alt=""
             />
-            <Link to={"/albums/" + id}>{title}</Link>
+            <Link to={'/albums/' + id}>{title}</Link>
           </div>
         ))}
       </div>

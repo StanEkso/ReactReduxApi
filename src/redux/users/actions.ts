@@ -6,7 +6,14 @@ export type AlbumsThunkAction = TypedThunkAction<UserAction>;
 
 export const fetchUsers = (): AlbumsThunkAction => {
   return async (dispatch) => {
-    const users = await getUsers();
-    dispatch({ type: UsersActionTypes.SET_USERS, payload: users });
+    try {
+      const users = await getUsers();
+      dispatch({ type: UsersActionTypes.SET_USERS, payload: users });
+    } catch (error) {
+      dispatch({
+        type: UsersActionTypes.SET_USERS_ERROR,
+        payload: 'Something went wrong when loading users'
+      });
+    }
   };
 };

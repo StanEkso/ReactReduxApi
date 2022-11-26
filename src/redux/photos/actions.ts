@@ -6,7 +6,14 @@ export type PhotosThunkAction = TypedThunkAction<PhotosAction>;
 
 export const fetchPhotos = (): PhotosThunkAction => {
   return async (dispatch) => {
-    const photos = await getPhotos();
-    dispatch({ type: PhotosActionTypes.SET_PHOTOS, payload: photos });
+    try {
+      const photos = await getPhotos();
+      dispatch({ type: PhotosActionTypes.SET_PHOTOS, payload: photos });
+    } catch (error) {
+      dispatch({
+        type: PhotosActionTypes.SET_PHOTOS_ERROR,
+        payload: 'Something went wrong when loading photos'
+      });
+    }
   };
 };

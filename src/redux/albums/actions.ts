@@ -6,8 +6,14 @@ export type AlbumsThunkAction = TypedThunkAction<AlbumAction>;
 
 export const fetchAlbums = (): AlbumsThunkAction => {
   return async (dispatch) => {
-    const albums = await getAlbums();
-
-    dispatch({ type: AlbumsActionTypes.SET_ALBUMS, payload: albums });
+    try {
+      const albums = await getAlbums();
+      dispatch({ type: AlbumsActionTypes.SET_ALBUMS, payload: albums });
+    } catch (error) {
+      dispatch({
+        type: AlbumsActionTypes.SET_ALBUMS_ERROR,
+        payload: 'Something went wrong when loading albums'
+      });
+    }
   };
 };

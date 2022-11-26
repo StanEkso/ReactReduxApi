@@ -2,13 +2,16 @@ import { Photo } from '../../types/photo';
 interface PhotosState {
   photos: Photo[];
   isLoaded: boolean;
+  error: string | null;
 }
 
 const initialState: PhotosState = {
   photos: [],
-  isLoaded: false
+  isLoaded: false,
+  error: null
 };
 export enum PhotosActionTypes {
+  SET_PHOTOS_ERROR = 'photos/set_error',
   SET_PHOTOS = 'photos/set'
 }
 
@@ -17,7 +20,12 @@ interface SetPhotosAction {
   payload: Photo[];
 }
 
-export type PhotosAction = SetPhotosAction;
+interface PhotosErrorAction {
+  type: PhotosActionTypes.SET_PHOTOS_ERROR;
+  payload: string;
+}
+
+export type PhotosAction = SetPhotosAction | PhotosErrorAction;
 export const photosReducer = (
   state = initialState,
   { type, payload }: PhotosAction
@@ -27,7 +35,13 @@ export const photosReducer = (
       return {
         ...state,
         photos: payload,
-        isLoaded: true
+        isLoaded: true,
+        error: null
+      };
+    case PhotosActionTypes.SET_PHOTOS_ERROR:
+      return {
+        ...state,
+        error: payload
       };
     default:
       return state;

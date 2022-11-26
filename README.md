@@ -6,8 +6,8 @@ Visit https://react-redux-api-omega.vercel.app/ to checkout it by yourself.
 
 ## Preview on Desktop
 
-![Desktop Preview, Main Page](./preview/preview_main.png "Desktop Main Page")
-![Desktop Preview, Skeleton User Page](./preview/preview_skeleton.png "Desktop User Page")
+![Desktop Preview, Main Page](./preview/preview_main.png 'Desktop Main Page')
+![Desktop Preview, Skeleton User Page](./preview/preview_skeleton.png 'Desktop User Page')
 
 ## Technologies
 
@@ -29,9 +29,10 @@ Visit https://react-redux-api-omega.vercel.app/ to checkout it by yourself.
 - Skeletons for best UX:
   - For lists: f.e. album list, user list and etc.
   - For cards: f.e. user card, photo card
-  - Etc
+  - Etc.
 - Data (e.g. users, albums and photos) is shared between pages.
-  - User shouldn't load repeating data few times.
+  - User shouldn't load same data few times.
+  - When one page is loaded, other pages getting loaded faster.
 - App is works fine for many devices (320px-1920px)
 
 ## Local install

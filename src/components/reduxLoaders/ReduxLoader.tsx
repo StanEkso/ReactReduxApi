@@ -22,7 +22,7 @@ const ReduxLoader: FC<Props & PropsWithChildren> = ({
     if (!isLoaded) {
       dispatch(loaderAction());
     }
-  });
+  }, [dispatch, isLoaded, loaderAction]);
   return (
     <OptionalRenderer condition={isLoaded} fallback={fallback}>
       {children}

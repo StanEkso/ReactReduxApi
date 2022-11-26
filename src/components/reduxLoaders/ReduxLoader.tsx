@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren, useEffect } from 'react';
 import { useAppDispatch } from '../../redux/hooks/useAppDispatch';
 import { useAppSelector } from '../../redux/hooks/useAppSelector';
 import { RootState, TypedThunkAction } from '../../redux/store';
-import OptionalRenderer from '../optionalRenderer/OptionalRenderer';
+import OptionalRenderer from './OptionalRenderer';
 
 interface Props {
   fallback: React.ReactNode;

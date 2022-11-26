@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import Breadcrumbs from '../breadcumbs/Breadcrumbs';
+import Breadcrumbs from './Breadcrumbs';
 const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? 'text-black underline underline-offset-4' : 'text-gray-500';
 const Layout: FC = () => {

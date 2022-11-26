@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import ReduxLoader from '../../components/reduxLoaders/ReduxLoader';
 import ListSkeleton from '../../components/skeletons/ListSkeleton';
-import UserList from '../../components/userlist/UserList';
+import UserList from '../../components/user/UserList';
 import { fetchUsers } from '../../redux/users/actions';
 import { useAppSelector } from '../../redux/hooks/useAppSelector';
 import { selectUsersData, selectUsersIsLoaded } from '../../redux/users/selectors';

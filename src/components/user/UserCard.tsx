@@ -41,7 +41,9 @@ const UserCard: FC<Props> = ({ name, username, email, phone, website, address })
           alt="Geoposition"
           className="h-4"
         />
-        {address?.city}, {address?.street}
+        <span>
+          {address?.city}, {address?.street}
+        </span>
       </p>
     </div>
   );

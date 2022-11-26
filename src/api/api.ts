@@ -1,13 +1,11 @@
 import { Album } from '../types/album';
 import { Photo } from '../types/photo';
 import { User } from '../types/user';
-import { validateResponse } from './common';
+import { get } from './common';
 import { BASE_URL } from './constants';
 
-export const getAlbums = (): Promise<Album[]> => fetch(BASE_URL + '/albums').then(validateResponse);
+export const getAlbums = () => get<Album[]>(BASE_URL + '/albums');
 
-export const getUsers = (): Promise<User[]> => fetch(BASE_URL + '/users').then(validateResponse);
+export const getUsers = () => get<User[]>(BASE_URL + '/users');
 
-export const getPhotos = (): Promise<Photo[]> => {
-  return fetch(BASE_URL + `/photos`).then(validateResponse);
-};
+export const getPhotos = () => get<Photo[]>(BASE_URL + '/photos');

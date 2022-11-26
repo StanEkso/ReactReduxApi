@@ -10,3 +10,5 @@ export const validateResponse = (res: Response) => {
     throw error;
   }
 };
+
+export const get = <T>(endpoint: string): Promise<T> => fetch(endpoint).then(validateResponse);

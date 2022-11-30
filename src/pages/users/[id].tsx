@@ -5,12 +5,12 @@ import ReduxLoader from '../../components/reduxLoaders/ReduxLoader';
 import ListSkeleton from '../../components/skeletons/ListSkeleton';
 import UserCardSkeleton from '../../components/skeletons/UserCardSkeleton';
 import UserCard from '../../components/user/UserCard';
-import { fetchAlbums } from '../../redux/albums/actions';
-import { fetchUsers } from '../../redux/users/actions';
 import { useAppSelector } from '../../redux/hooks/useAppSelector';
 import { NotFoundRedirect } from '../404';
 import { selectUsersIsLoaded, selectUsersState } from '../../redux/users/selectors';
 import { selectAlbumsData, selectAlbumsIsLoaded } from '../../redux/albums/selectors';
+import { fetchUsers } from '../../redux/users/slice';
+import { fetchAlbums } from '../../redux/albums/slice';
 const UserPage: FC = () => {
   const { id } = useLoaderData() as ReturnType<typeof loader>;
   const { users, isLoaded: isUsersLoaded } = useAppSelector(selectUsersState);

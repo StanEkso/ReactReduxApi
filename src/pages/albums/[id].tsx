@@ -6,15 +6,15 @@ import CreatedBySkeleton from '../../components/skeletons/CreatedBySkeleton';
 import ListSkeleton from '../../components/skeletons/ListSkeleton';
 import PhotoCardSkeleton from '../../components/skeletons/PhotoCardSkeleton';
 import TitleSkeleton from '../../components/skeletons/TitleSkeleton';
-import { fetchAlbums } from '../../redux/albums/actions';
-import { fetchPhotos } from '../../redux/photos/actions';
-import { fetchUsers } from '../../redux/users/actions';
 import { useAppSelector } from '../../redux/hooks/useAppSelector';
 import { getAlbumAuthor, getAlbumById, getAlbumPhotos } from '../../utils';
 import { NotFoundRedirect } from '../404';
 import { selectAlbumsIsLoaded, selectAlbumsState } from '../../redux/albums/selectors';
 import { selectUsersData, selectUsersIsLoaded } from '../../redux/users/selectors';
 import { selectPhotosData, selectPhotosIsLoaded } from '../../redux/photos/selectors';
+import { fetchAlbums } from '../../redux/albums/slice';
+import { fetchUsers } from '../../redux/users/slice';
+import { fetchPhotos } from '../../redux/photos/slice';
 
 const AlbumPage: FC = () => {
   const { id } = useLoaderData() as ReturnType<typeof loader>;

@@ -43,9 +43,6 @@ const UserPage: FC = () => {
 };
 
 export default UserPage;
-export const loader = ({ params: { id } }: LoaderFunctionArgs) => {
-  const parsedId = id ? (isNaN(+id) ? 0 : +id) : 0;
-  return {
-    id: parsedId
-  };
-};
+export const loader = ({ params: { id } }: LoaderFunctionArgs) => ({
+  id: id ? (isNaN(+id) ? 0 : +id) : 0
+});

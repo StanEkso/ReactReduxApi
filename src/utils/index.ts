@@ -2,11 +2,10 @@ import { Album } from '../types/album';
 import { Photo } from '../types/photo';
 import { User } from '../types/user';
 
-export const match = <T, S>(value: T, getValue: (a: S) => T) => {
-  return function (a: S) {
-    return getValue(a) === value;
-  };
-};
+export const match =
+  <T, S>(value: T, getValue: (a: S) => T) =>
+  (a: S) =>
+    getValue(a) === value;
 export const getUseAlbums = ({ albums, user }: { albums: Album[]; user: User }) =>
   albums.filter(match(user.id, (a) => a.userId));
 
